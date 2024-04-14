@@ -8,10 +8,16 @@
 public class ConditionEncapsulationExample
 {
     // Encapsulated condition method
-    public bool IsProductAffordableAndAvailable(Product product)
+    private bool IsProductAffordableAndAvailable(Product product)
     {
         // Check if the product is not null, the price is less than or equal to $100, and it is in stock
         return product is not null && product.Price <= 100 && product.InStock;
+    }
+
+    // Public method to access the encapsulated condition method
+    public bool CheckProduct(Product product)
+    {
+        return IsProductAffordableAndAvailable(product);
     }
 }
 
@@ -32,8 +38,8 @@ public class Program
         Product product3 = null; // Null product
 
         // Using the encapsulated condition method
-        Console.WriteLine("Product 1 is affordable and available: " + example.IsProductAffordableAndAvailable(product1));
-        Console.WriteLine("Product 2 is affordable and available: " + example.IsProductAffordableAndAvailable(product2));
-        Console.WriteLine("Product 3 is affordable and available: " + example.IsProductAffordableAndAvailable(product3));
+        Console.WriteLine("Product 1 is affordable and available: " + (example.CheckProduct(product1) ? "yes" : "no"));
+        Console.WriteLine("Product 2 is affordable and available: " + (example.CheckProduct(product2) ? "yes" : "no"));
+        Console.WriteLine("Product 3 is affordable and available: " + (example.CheckProduct(product3) ? "yes" : "no"));
     }
 }
